@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container mt-5">
+    <!-- Welcome Section -->
+    <div class="jumbotron bg-light shadow-lg p-5 rounded text-center">
+        <h1 class="display-4 text-primary font-weight-bold">Welcome to AuctionMaster!</h1>
+        <p class="lead text-muted">Your go-to platform for buying and selling items at auction.</p>
+        <hr class="my-4">
+        <p class="text-secondary">Ready to explore the best deals or sell your items? Get started below!</p>
+
+        <!-- Action Buttons -->
+        <div class="row justify-content-center mt-4">
+            <!-- Button Column -->
+            
+
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <!-- Login and Register Buttons for Unauthenticated Users -->
+                <div class="col-12 col-md-3 mb-3">
+                    <a class="btn btn-secondary btn-lg btn-block" asp-area="Identity" asp-page="/Account/Login">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                </div>
+
+                <div class="col-12 col-md-3 mb-3">
+                    <a class="btn btn-outline-secondary btn-lg btn-block" asp-area="Identity" asp-page="/Account/Register">
+                        <i class="fas fa-user-plus"></i> Register
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="col-12 col-md-3 mb-3">
+                    <a class="btn btn-primary btn-lg btn-block" asp-controller="Listings" asp-action="Index">
+                        <i class="fas fa-gavel"></i> Browse Auctions
+                    </a>
+                </div>
+
+                <div class="col-12 col-md-3 mb-3">
+                    <a class="btn btn-success btn-lg btn-block" asp-controller="Listings" asp-action="Create">
+                        <i class="fas fa-plus-circle"></i> Create New Listing
+                    </a>
+                </div>
+                <!-- Logout Button for Authenticated Users -->
+                <div class="col-12 col-md-3 mb-3">
+                    <a class="btn btn-danger btn-lg btn-block" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home")">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
